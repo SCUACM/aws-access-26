@@ -113,8 +113,8 @@ You should see the response in the console!
 - **Fix**: Re-run the credential script from the 1-setup tutorial, then reopen your terminal
 
 **`AccessDeniedException` / `UnauthorizedOperation`**
-- **Cause**: Your IAM user does not have permission to use Bedrock or the specific model
-- **Fix**: Go to IAM in the AWS console and confirm your user has `AmazonBedrockFullAccess` attached
+- **Cause**: Model access isn't enabled for that model in the Bedrock console, or you're working in the wrong region
+- **Fix**: Open the model in the Bedrock console (see [section 2](#2-enabling-aws-bedrock-models)) and check that access is enabled for it. Make sure the console is set to `us-east-1` and your code uses `region_name="us-east-1"`
 
 **`ValidationException` — "Retry your request with the ID or ARN"**
 - **Cause**: The model you selected requires an Inference Profile ID, not a plain Model ID

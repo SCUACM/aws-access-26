@@ -6,7 +6,7 @@ Welcome to the SCU ACM AWS Hackathon! This guide shows you how to securely log i
 ---
 
 ## Fundamental Hackathon Rules
-1. **NO Access Keys:** Do **NOT** generate IAM Access Keys. You do not need them, and creating them risks leaking secrets.
+1. **NO IAM Access Keys:** Do **NOT** generate long-lived IAM Access Keys. You do not need them, and creating them risks leaking secrets. The **temporary session credentials** from your Workshop Studio dashboard (used in [Option A](#option-a-local-terminal--vscode-temporary-session-keys)) are different — they come with an `AWS_SESSION_TOKEN` and expire automatically, so using those is fine.
 2. **Never Call AWS Services Directly from the Frontend:** Your web application (React, Vue, iOS, HTML) should **never** contain AWS credentials or SDK calls. Frontend talks to **API Gateway**, which triggers **AWS Lambda**.
 3. **Stick to One Region:** Pick **`us-east-1` (N. Virginia)** in the top-right corner of the AWS Console and create all your resources in that exact region.
 
@@ -15,67 +15,39 @@ Welcome to the SCU ACM AWS Hackathon! This guide shows you how to securely log i
 ## Table of Contents
 - [1) AWS Management Console](#1-aws-management-console)
     - [1a) Logging into AWS Workshop Studio](#1a-logging-into-aws-workshop-studio)
-    - [1b) Creating Your User](#1b-creating-your-user)
 - [2) Setting Up Your Terminal (2 Options)](#2-setting-up-your-terminal-2-options)
     - [Option A: Local Terminal / VSCode (temporary session keys)](#option-a-local-terminal--vscode-temporary-session-keys)
     - [Option B: AWS CloudShell (Zero Setup)](#option-b-aws-cloudshell-zero-setup)
 - [3) Session Lifespan & Troubleshooting Lost Access (Option A Only)](#3-session-lifespan--troubleshooting-lost-access-option-a-only)
-    - [Scenario A: "I closed my terminal/VSCode window!"](#scenario-a-i-closed-my-terminalvscode-window)
+    - [Scenario A: "I opened a new terminal and it says 'Unable to locate credentials'!"](#scenario-a-i-opened-a-new-terminal-and-it-says-unable-to-locate-credentials)
     - [Scenario B: "My keys expired after a few hours!"](#scenario-b-my-keys-expired-after-a-few-hours)
     - [How to Check Your Current Session Status](#how-to-check-your-current-session-status)
     - [How to Regenerate Fresh Keys](#how-to-regenerate-fresh-keys)
+- [4) Kiro Credits](#4-kiro-credits)
 
 ---
 
 ## 1) AWS Management Console
-Before jumping into the code, we first need to create a new user. AWS typically has a root user that gives out permissions, with other users that run specific services. Because the hackathon is so short, we're only going to create one user and give it all the permissions you need.
+Before jumping into the code, you need to get into your team's AWS account. Workshop Studio gives each of you access to it, along with your own temporary credentials — there's no need to create any users yourself.
 
 ### 1a) Logging into AWS Workshop Studio
-Every team is provided with a temporary AWS environment for the duration of the hackathon. You do **not** need a credit card. Only **one** person will need to set this up to give everyone access.
+Every team is provided with a temporary AWS environment for the duration of the hackathon. You do **not** need a credit card. **Every person on the team must join individually** — one person joining does **not** give the rest of the team access.
 
-1. Navigate to the Workshop Account URL
-    - It should look something like: `https://catalog.us-east-1.prod.workshops.aws/...`
-2. Select **Email one-time password (OTP)**
-3. Enter your **SCU Email Address** (`@scu.edu`)
-4. Check your inbox for the 6-digit passcode, enter it, and click **Sign In**
-5. Accept the Terms & Conditions and click **Join event**
-6. On the Event Dashboard, go to the sidebar and click **Open AWS Console** in the **AWS account access** section
+1. Go to **[judging.scuacm.com](https://judging.scuacm.com)** and sign in with the link we emailed you
+2. Open **Your team** — you'll see your team's **AWS workshop join link** and **access code**
+3. Click the join link
+    - If the link doesn't work, go to **[catalog.us-east-1.prod.workshops.aws/join](https://catalog.us-east-1.prod.workshops.aws/join)** and enter the access code from that same team page when asked
+4. Select **Email one-time password (OTP)**
+5. Enter your **SCU Email Address** (`@scu.edu`) — **not** a personal Gmail
+    - Signing in with a personal address puts you outside your team's environment. There is no error message, so you won't notice until you go looking for something a teammate created
+6. Check your inbox for the 6-digit passcode, enter it, accept the Terms & Conditions, and click **Join event**
+7. On the Event Dashboard, go to the sidebar and click **Open AWS Console** in the **AWS account access** section
 
 ![Open AWS Console](images/open_console.png)
 
 **Note**: You do not need a credit card. If you see billing charges, make sure you are in the provided workshop account — not a personal AWS account.
 
 ![Billing](images/billing.png)
-
-### 1b) Creating Your User
-1. Type **IAM** in the search bar at the top, and click on the top result.
-
-![IAM](images/iam.png)
-
-2. Click on **IAM users** under the Access Management tab on the left sidebar
-
-![IAM Dashboard](images/iam_users.png)
-
-3. You should see the existing workshop user, which may show **Access denied** in some columns — that is normal. Click the orange **Create user** button in the top right
-
-![Create User](images/create_user.png)
-
-4. Give it a name, whatever you think is best
-    - Do **NOT** check "Provide user access to the AWS Management Console" — this user will only be used programmatically
-
-![IAM Name](images/iam_name.png)
-
-5. In the permissions options, click **Attach policies directly**
-    - Search for the service you want to use followed by `FullAccess` and check the box to add it
-    - We recommend starting with `AmazonBedrockFullAccess`, `AmazonSageMakerFullAccess`, `AmazonEC2FullAccess`, and `AmazonS3FullAccess`
-    - You can add more policies later if you find you need them
-    - Once you've selected your policies, click **Next**
-
-![Permissions FullAccess](images/permissions_fullaccess.png)
-
-6. If everything is correct, click **Create user**
-
-![IAM Final](images/iam_final.png)
 
 ## 2) Setting Up Your Terminal (2 Options)
 To run AWS CLI commands or deploy infrastructure, choose **one** of the options below.
@@ -187,3 +159,9 @@ If your session expired:
 2. Click **Get AWS CLI commands / AWS CLI Credentials**
 3. Copy the new credentials block and re-run the script (`.\set_aws_creds.ps1` or `bash set_aws_creds.sh`), pasting the new values when prompted
 4. Verify by running `aws sts get-caller-identity` in your terminal
+
+## 4) Kiro Credits
+Every participant also gets their own **Kiro** code worth **1000 credits**. Kiro is an AI coding IDE from AWS.
+
+- Find your code by signing in at **[judging.scuacm.com](https://judging.scuacm.com)** and opening **Your team** — the same page as your AWS workshop join link. Each person sees only their own code; it is **not** shared with your team
+- The redemption link is right next to your code
