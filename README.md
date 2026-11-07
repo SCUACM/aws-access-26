@@ -13,7 +13,7 @@ Welcome! This repo has two tutorials to get you up and running with AWS. Complet
 ---
 
 ## Tutorial 1 — Setup
-**Start here.** Log into AWS Workshop Studio, create an IAM user with Bedrock permissions, and get your credentials loaded into your terminal.
+**Start here.** Join your team's AWS Workshop Studio environment from [judging.scuacm.com](https://judging.scuacm.com), create an IAM user with Bedrock permissions, and get your credentials loaded into your terminal. **Everyone joins individually with their own SCU email** — one teammate joining does not cover the team. This tutorial also covers where to find your personal Kiro credits.
 
 → [1-setup/README.md](1-setup/README.md)
 
