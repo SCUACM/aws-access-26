@@ -163,5 +163,5 @@ If your session expired:
 ## 4) Kiro Credits
 Every participant also gets their own **Kiro** code worth **1000 credits**. Kiro is an AI coding IDE from AWS.
 
-- Find your code by signing in at **[judging.scuacm.com](https://judging.scuacm.com)**. It's on your own page, and only you can see it — it is **not** shared with your team
+- Find your code by signing in at **[judging.scuacm.com](https://judging.scuacm.com)** and opening **Your team** — the same page as your AWS workshop join link. Each person sees only their own code; it is **not** shared with your team
 - The redemption link is right next to your code
