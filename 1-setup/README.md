@@ -15,7 +15,6 @@ Welcome to the SCU ACM AWS Hackathon! This guide shows you how to securely log i
 ## Table of Contents
 - [1) AWS Management Console](#1-aws-management-console)
     - [1a) Logging into AWS Workshop Studio](#1a-logging-into-aws-workshop-studio)
-    - [1b) Creating Your User](#1b-creating-your-user)
 - [2) Setting Up Your Terminal (2 Options)](#2-setting-up-your-terminal-2-options)
     - [Option A: Local Terminal / VSCode (temporary session keys)](#option-a-local-terminal--vscode-temporary-session-keys)
     - [Option B: AWS CloudShell (Zero Setup)](#option-b-aws-cloudshell-zero-setup)
@@ -29,7 +28,7 @@ Welcome to the SCU ACM AWS Hackathon! This guide shows you how to securely log i
 ---
 
 ## 1) AWS Management Console
-Before jumping into the code, we first need to create a new user. AWS typically has a root user that gives out permissions, with other users that run specific services. Because the hackathon is so short, we're only going to create one user and give it all the permissions you need.
+Before jumping into the code, you need to get into your team's AWS account. Workshop Studio gives each of you access to it, along with your own temporary credentials — there's no need to create any users yourself.
 
 ### 1a) Logging into AWS Workshop Studio
 Every team is provided with a temporary AWS environment for the duration of the hackathon. You do **not** need a credit card. **Every person on the team must join individually** — one person joining does **not** give the rest of the team access.
@@ -49,36 +48,6 @@ Every team is provided with a temporary AWS environment for the duration of the 
 **Note**: You do not need a credit card. If you see billing charges, make sure you are in the provided workshop account — not a personal AWS account.
 
 ![Billing](images/billing.png)
-
-### 1b) Creating Your User
-1. Type **IAM** in the search bar at the top, and click on the top result.
-
-![IAM](images/iam.png)
-
-2. Click on **IAM users** under the Access Management tab on the left sidebar
-
-![IAM Dashboard](images/iam_users.png)
-
-3. You should see the existing workshop user, which may show **Access denied** in some columns — that is normal. Click the orange **Create user** button in the top right
-
-![Create User](images/create_user.png)
-
-4. Give it a name, whatever you think is best
-    - Do **NOT** check "Provide user access to the AWS Management Console" — this user will only be used programmatically
-
-![IAM Name](images/iam_name.png)
-
-5. In the permissions options, click **Attach policies directly**
-    - Search for the service you want to use followed by `FullAccess` and check the box to add it
-    - We recommend starting with `AmazonBedrockFullAccess`, `AmazonSageMakerFullAccess`, `AmazonEC2FullAccess`, and `AmazonS3FullAccess`
-    - You can add more policies later if you find you need them
-    - Once you've selected your policies, click **Next**
-
-![Permissions FullAccess](images/permissions_fullaccess.png)
-
-6. If everything is correct, click **Create user**
-
-![IAM Final](images/iam_final.png)
 
 ## 2) Setting Up Your Terminal (2 Options)
 To run AWS CLI commands or deploy infrastructure, choose **one** of the options below.
